@@ -1,5 +1,5 @@
 const { json, send } = require('micro')
-const { verifyPassword } = require('../lib/auth')
+const { verifyPassword, generateToken } = require('../lib/auth')
 
 module.exports.POST = async function login (req, res) {
   const { conn } = req
@@ -9,5 +9,5 @@ module.exports.POST = async function login (req, res) {
   if (!hash) return send(res, 401, { error: 'Unauthorized' })
   const valid = await verifyPassword(hash, password)
   if (!valid) return send(res, 401, { error: 'Unauthorized' })
-  send(res, 200, { success: true })
+  send(res, 200, { success: true, token: generateToken(username) })
 }

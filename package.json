@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "fs-router": "^0.4.0",
+    "jsonwebtoken": "^8.1.0",
     "micro": "^9.1.0",
     "mysql2": "^1.5.1"
   },
