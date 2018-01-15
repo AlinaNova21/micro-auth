@@ -12,7 +12,7 @@ async function setup (fn) {
     database: process.env.MYSQL_DB || ''
   })
   return (req, res) => {
-    req.conn = conn
+    req.db = conn
     return fn(req, res)
   }
 }
