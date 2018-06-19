@@ -5,6 +5,7 @@ module.exports.POST = async function register (req, res) {
   const { db } = req
   const { username, email, password } = await json(req)
   if (!username || !email || !password) return send(res, 400, { error: 'Bad Request' })
+  username = username.toLowerCase()
   const hash = await hashPassword(password)
   const [rows] = await db.execute('SELECT pk FROM auth WHERE username = ? OR email = ?', [username, email])
   if (rows.length) return send(res, 409, { error: 'User already exists' })

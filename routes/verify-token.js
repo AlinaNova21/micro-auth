@@ -8,7 +8,7 @@ module.exports.POST = async (req, res) => {
   if (!token) return send(res, 409, { error: 'Bad Request' })
   try {
     let data = await decodeToken(token)
-    if (data.exp - Date.now() < REFRESH_PERIOD) {
+    if (data.exp && data.exp - Date.now() < REFRESH_PERIOD) {
       const newToken = refreshToken(token)
       send(res, 200, { success: true, result: data, token: newToken })
     }
